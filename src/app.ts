@@ -10,11 +10,12 @@ document.body.appendChild(canvas);
 
 
 var context : CanvasRenderingContext2D = canvas.getContext("2d");
-context.beginPath();
-context.arc(canvas.width/2,canvas.height/2,Math.min(canvas.width,canvas.height)/2 - 10,0,2*Math.PI,false);
-context.stroke();
 
+var offset = {x:canvas.width/2,y:canvas.height/2};
 
+var worldCircle = new Circle(canvas.height/2-10);
+worldCircle.render(offset, context);
 
-var pen = new Pen();
-pen.getWorldLocation();
+var firstCircle = new Circle(100, worldCircle);
+firstCircle.angle = 0;
+firstCircle.render(offset, context);

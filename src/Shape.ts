@@ -28,6 +28,12 @@ class Circle implements Shape {
     private radius: number;
     private distanceTravelled: number;
 
+    constructor(radius : number, parentShape : Circle = null) {
+        this.radius = radius;
+        this.parentShape = parentShape;
+        this.distanceTravelled = 0;
+    }
+
     moveDistance(distance: number) {
         this.distanceTravelled = this.distanceTravelled + distance % this.parentShape.getInnerTrackSize();
     }
@@ -61,4 +67,20 @@ class Circle implements Shape {
 
         return polar2Cartesian(polarCoords, this.parentShape.getWorldLocation());
     }
+
+    render(offset : CartesianCoordinate, context : CanvasRenderingContext2D) {
+        var location = this.getWorldLocation();
+        console.log(location);
+        context.beginPath();
+        context.arc(
+            location.x + offset.x,
+            location.y + offset.y,
+            this.radius,
+            0,
+            2*Math.PI,
+            false
+        );
+        context.stroke();
+    }
+
 }
