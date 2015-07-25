@@ -45,7 +45,6 @@ class Circle implements Shape {
 
     rotate(distance: number) {
         this.angle += (distance / this.getCircumference()) * 2 * Math.PI;
-        console.log(this.angle);
     }
 
     getCircumference() {
@@ -61,8 +60,9 @@ class Circle implements Shape {
         if (this.parentShape === null) {
             return {x: 0, y:0}
         }
+
         var polarCoords = {
-            angle : this.distanceTravelled / this.parentShape.getInnerTrackSize() * Math.PI * 2,
+            angle : this.parentShape.angle - this.distanceTravelled / this.parentShape.getInnerTrackSize() * Math.PI * 2,
             distance : this.parentShape.radius - this.radius
         }
 
