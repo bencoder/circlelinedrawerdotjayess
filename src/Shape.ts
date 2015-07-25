@@ -1,8 +1,24 @@
+interface PolarCoordinate {
+    angle : number;
+    distance : number;
+}
+
+interface CartesianCoordinate {
+    x : number;
+    y : number;
+}
+
+function polar2Cartesian(coords : PolarCoordinate, center : CartesianCoordinate) : CartesianCoordinate {
+    return {
+        x : 0,
+        y : 0
+    };
+}
+
 interface Shape {
     parentShape: Shape;
     getWorldLocation(): CartesianCoordinate
     angle: number
-
 }
 
 
@@ -38,8 +54,11 @@ class Circle implements Shape {
         if (this.parentShape === null) {
             return {x: 0, y:0}
         }
-        var angle = this.distanceTravelled / this.parentShape.getInnerTrackSize() * Math.PI * 2
-        var distance = this.parentShape.radius - this.radius;
-        return PolarCoordinate(angle, distance).toCartesian(this.parentShape.getWorldLocation())
+        var polarCoords = {
+            angle : this.distanceTravelled / this.parentShape.getInnerTrackSize() * Math.PI * 2,
+            distance : this.parentShape.radius - this.radius
+        }
+
+        return polar2Cartesian(polarCoords, this.parentShape.getWorldLocation());
     }
 }

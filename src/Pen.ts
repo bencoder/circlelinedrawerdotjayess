@@ -1,20 +1,15 @@
-interface PolarCoordinate {
-    angle : number;
-    distance : number;
-}
-
-interface CartesianCoordinate {
-
-}
 
 
 class Pen {
-    public parent : Shape;
-    public position : PolarCoordinate // With respect to parent
+    public parentShape : Shape;
+    public position : PolarCoordinate; // With respect to parent
 
 
-    getWorldLocation(): CartesianCoordinate
+    public getWorldLocation(): CartesianCoordinate
     {
-
+        return polar2Cartesian(
+            this.position,
+            this.parentShape.getWorldLocation()
+        );
     }
 }
