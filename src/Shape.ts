@@ -1,51 +1,45 @@
-class Shape {
-    private parent: Shape
+interface Shape {
+    parentShape: Shape;
+    getWorldLocation(): CartesianCoordinate
+    angle: number
+
+}
+
+
+class Circle implements Shape {
+    parentShape: Circle;
+    angle: number = 0;
+    private radius: number;
     private distanceTravelled: number;
 
-    public getWorldLocation(): CartesianCoordinate
-    public getRotation(): number
-
-    public getInnerTrackSize(): number
-
-    public moveDistance(distance: number) {
-        this.distanceTravelled = this.distanceTravelled + distance % parent.getInnerTrackSize();
+    moveDistance(distance: number) {
+        this.distanceTravelled = this.distanceTravelled + distance % this.parentShape.getInnerTrackSize();
     }
 
-    public rotate(distance: number): Void;
-
-    public update(distance: number) {
+    update(distance: number) {
         this.moveDistance(distance);
         this.rotate(distance);
     }
-}
 
-class Circle extends Shape {
-    private radius: number;
-    private angle: number = 0;
-
-    public getRadius() {
-        return radius
-    }
-
-    public rotate(distance: number) {
+    rotate(distance: number) {
         this.angle += distance / this.getCircumference() * 2 * Math.PI
     }
 
-    private getCircumference() {
+    getCircumference() {
         return 2 * Math.PI * this.radius
     }
 
-    public getInnerTrackSize() {
+    getInnerTrackSize() {
         return 2 * Math.PI * this.radius
     }
 
-    public getWorldLocation() {
-        // FIXME: This assumes parent is another circle
-        if (this.parent === null) {
+    getWorldLocation() {
+        // FIXME: This assumes parentShape is another circle
+        if (this.parentShape === null) {
             return {x: 0, y:0}
         }
-        var angle = this.distanceTravelled / this.parent.getInnerTrackSize() * Math.PI * 2
-        var distance = this.parent.getRadius() - this.radius;
-        return PolarCoordinate(angle, distance).toCartesian(this.parent.getWorldLocation())
+        var angle = this.distanceTravelled / this.parentShape.getInnerTrackSize() * Math.PI * 2
+        var distance = this.parentShape.radius - this.radius;
+        return PolarCoordinate(angle, distance).toCartesian(this.parentShape.getWorldLocation())
     }
 }
