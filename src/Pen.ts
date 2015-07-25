@@ -3,12 +3,17 @@ interface PolarCoordinate {
     distance : number;
 }
 
+interface CartesianCoordinate {
+
+}
+
+
 class Pen {
     public parent : Shape;
-    public position : PolarCoordinate
+    public position : PolarCoordinate // With respect to parent
 
 
-    getWorldLocation()
+    getWorldLocation(): CartesianCoordinate
     {
 
     }
