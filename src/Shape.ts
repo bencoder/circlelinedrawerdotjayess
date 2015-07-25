@@ -44,7 +44,8 @@ class Circle implements Shape {
     }
 
     rotate(distance: number) {
-        this.angle += distance / this.getCircumference() * 2 * Math.PI
+        this.angle += (distance / this.getCircumference()) * 2 * Math.PI;
+        console.log(this.angle);
     }
 
     getCircumference() {
@@ -70,7 +71,6 @@ class Circle implements Shape {
 
     render(offset : CartesianCoordinate, context : CanvasRenderingContext2D) {
         var location = this.getWorldLocation();
-        console.log(location);
         context.beginPath();
         context.arc(
             location.x + offset.x,

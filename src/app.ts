@@ -18,4 +18,18 @@ worldCircle.render(offset, context);
 
 var firstCircle = new Circle(100, worldCircle);
 firstCircle.angle = 0;
+firstCircle.update(1);
 firstCircle.render(offset, context);
+
+var pen = new Circle(10, firstCircle);
+
+function update() {
+    context.clearRect(0,0,canvas.width, canvas.height);
+    firstCircle.update(1);
+    worldCircle.render(offset, context);
+    firstCircle.render(offset, context);
+    pen.render(offset, context);
+    requestAnimationFrame(update);
+}
+
+requestAnimationFrame(update);
