@@ -10,8 +10,8 @@ interface CartesianCoordinate {
 
 function polar2Cartesian(coords : PolarCoordinate, center : CartesianCoordinate) : CartesianCoordinate {
     return {
-        x : 0,
-        y : 0
+        x : coords.distance * Math.cos(coords.angle) + center.x,
+        y : coords.distance * Math.sin(coords.angle) + center.y
     };
 }
 
