@@ -1,6 +1,8 @@
 var canvas : HTMLCanvasElement = document.createElement("canvas");
 canvas.style.width = "100%";
 canvas.style.height = "100%";
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 document.body.appendChild(canvas);
 
 
